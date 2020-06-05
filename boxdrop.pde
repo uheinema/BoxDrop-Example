@@ -33,14 +33,17 @@ void reset() {
 }
 
 void draw() {
-  background(gameover?color(255, 12, 13):(frameCount|0xff807f80));
+  background(gameover?color(155, 12, 13):(frameCount|0xff807f80));
   fill(0);
   text("Score: "+score+(gameover?"  Try again.":" fr: "+frameRate), 
     50, 100);
-  if (!gameover) for (Spawner s : spawn) {
+  for (Spawner s : spawn) {
     s.draw();
-    s.spawn();
-    s.move();
+    if (!gameover) {
+
+      s.spawn();
+      s.move();
+    }
   }
   blocks.draw().move();
 }

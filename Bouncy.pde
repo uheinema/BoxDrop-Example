@@ -17,10 +17,16 @@ class Bouncy extends Block{
     to.mult(0.011f);
     vel.add(to);
     if(!super.move()){
-      vel.mult(-1.0f);
+      vel.mult(-1.01f);
       return false;
     }
     return true;
+  }
+  
+  @Override void draw(){
+   // super.draw();
+    fill(getColor(type));
+    ellipse (pos.x+dim.x/2,pos.y+dim.y/2,dim.x,dim.y);
   }
   
 }

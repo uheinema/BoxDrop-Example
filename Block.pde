@@ -48,10 +48,11 @@ class Block extends Something {
 
  @Override
   boolean move() {
-    if (pos.y >= maxh){
-      pos.y=maxh;
-      return false; // at bottom
-    }
+    if (pos.y >= maxh) return false;
+  //  if(pos.y>maxh){
+ //     pos.y=maxh;
+ //     return false; // at bottom
+  //  }
     // only look in movement direction
     boolean moved=super.move();
     if(!moved) return false;

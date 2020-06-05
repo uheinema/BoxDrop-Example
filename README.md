@@ -6,4 +6,4 @@ Inspired by
 
 ~~Cleaned up~~ Rewrote the code, somewhat, and it became a mini-game of sorts :-)
 
-![Screenshot_20200605_011631_com.calsignlabs.apde.sketchpreview](Screenshot_20200605_011631_com.calsignlabs.apde.sketchpreview.jpg)
+![Screenshot_20200605_011631_com.calsignlabs.apde.sketchpreview](Screenshot1.jpg)

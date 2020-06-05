@@ -10,8 +10,8 @@ class Spawner extends Block {
     super(
        new PVector(pos, y),
        s,0);
-    vel.y=random(0.5);
-    delay=60;// delay/10=distance of blicks
+    setVel(0,random(0.1));
+    delay=90;// delay/10=distance of blicks
     next();
   }
 
@@ -31,14 +31,16 @@ class Spawner extends Block {
      gameover=true;
      return;  
     }  
-    Block b=new Block(pos, dim.x,type);
-    b.vel.y=dim.y/10;
+    Block b=(random(10)>5)
+      ?new Bouncy(pos, dim.x,type)
+      :new Block(pos, dim.x,type);
+    b.setVel(0,dim.y/10);
     blocks.add(b);
     next();
   }
     
  void next(){
-   float r = random(4);
+   float r = random(3);
     r = round(r); 
     type=int(r);
     timer = int(delay+random(delay));

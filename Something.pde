@@ -8,12 +8,7 @@ class Something { // a moving rect?
   int distmark=0;
   int type=0;
   
-  void move() {
-    pos.add(vel);
-  }
-  void unmove() {
-    pos.sub(vel);
-  }
+  
 
   Something (float s) {
     dim = new PVector(s, s);
@@ -25,6 +20,19 @@ class Something { // a moving rect?
     this(s);
     pos.x=ps.x;
     pos.y=ps.y;
+  }
+  
+  void setVel(float x,float y){
+    vel.x=x;vel.y=y;
+  }
+  
+  boolean move() {
+    pos.add(vel);
+    return true;
+  }
+  
+  void unmove() {
+    pos.sub(vel);
   }
   
   boolean overlaps(Something other) {

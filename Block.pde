@@ -11,13 +11,11 @@ class Block extends Something {
   boolean xoverlaps(Something b) {
     boolean lap=false;
     float rim=dim.x/5;
-
-    // if(rim==0) return super.overlaps(b,tol);
-
+    
     grow(rim, -rim);
     if (super.overlaps(b)) lap=true;
     grow(-rim*2, 2*rim);
-    if (!lap&&super.overlaps(b))lap=true;
+    if (!lap&&super.overlaps(b)) lap=true;
     grow(rim, -rim);
     return lap;
   }
@@ -48,14 +46,22 @@ class Block extends Something {
     super.draw();
   }
 
-  void move() {
-    if (pos.y >= maxh) return; // at bottom
-    // only look downward
-    super.move();
+ @Override
+  boolean move() {
+    if (pos.y >= maxh){
+      pos.y=maxh;
+      return false; // at bottom
+    }
+    // only look in movement direction
+    boolean moved=super.move();
+    if(!moved) return false;
     grow(-2, -2);
-    if (blocks.collides(this)>=0)
+    if (blocks.collides(this)>=0){
+      moved=false;
       super.unmove();
+    }
     grow(2, 2);
+    return moved;
   }// move
 }
 

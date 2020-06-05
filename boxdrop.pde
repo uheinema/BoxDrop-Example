@@ -12,7 +12,7 @@ int score=0;
 float maxh ;
 
 void setup() {
-  fullScreen(P3D);//size(600,600);
+  fullScreen();//size(600,600);
   frameRate(30);
 
   reset();
@@ -40,7 +40,7 @@ void draw() {
   if(gameover&&frameCount%10<2) fill(255);
   text("Score: "+score+(gameover?"  Try again.":" fr: "+frameRate), 
     50, 100);
-   lights();camera();
+   //lights();camera();
   for (Spawner s : spawn) {
     s.draw();
     if (!gameover) {

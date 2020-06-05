@@ -58,35 +58,35 @@ class Blocks
     return null;
   }
 
-  int marked;
+  
 
-  int markContacts(Something mark) {
-    ArrayList<Something> hood;
+  public int markContacts(Something mark) {
+    ArrayList<Something> hood=new ArrayList<Something>(1);
     for (Something b : this) {
       b.distmark=0;
     }
     mark.distmark=1;
-    marked=1;
-    hood=new ArrayList<Something>();
     hood.add(mark);
-    mark(hood);
-    if (marked<3)marked=0;
-    for (Something b : this) {
-      if (marked<3) b.distmark=0;
+    int marked=mark(hood)+1;
+    if (marked<3) {   
+      marked=0;
+      for (Something b : this) {
+        b.distmark=0;
+      }
     }
     return marked;
   }
 
-  void mark(ArrayList<Something> lasthood) {
+  int mark(ArrayList<Something> lasthood) {
     ArrayList<Something> hood=new ArrayList<Something>();
+    int marked=0;
     for (Something mark : lasthood) {
       for (Something b : this) {
-        Block bb=(Block)b;
-        if (b==mark||
-          b.type!=mark.type||
-          b.distmark!=0) {
-          continue;
-        } else if (bb.xoverlaps(mark)) {
+        if (b!=mark&&
+          b.type==mark.type&&
+          b.distmark==0&&
+          b.isHoodie(mark)) 
+        {
           b.distmark=mark.distmark+1;
           hood.add(b);
           marked++;
@@ -94,8 +94,9 @@ class Blocks
       }
     }
     if (hood.size()>0) {
-      mark(hood);
+      marked+=mark(hood);
     }
+    return marked;
   }
 
   void cleanup() {

@@ -39,6 +39,10 @@ class Something { // a moving rect?
     return overlaps(other,0.0f);
   }
   
+  boolean isHoodie(Something other) {
+    return overlaps(other,0.0f);
+  }
+  
   boolean overlaps(Something other,float tol) {
     // bounding box as default
     return
@@ -57,6 +61,11 @@ class Something { // a moving rect?
 
   void draw() {
     rect(pos.x, pos.y, dim.x, dim.y);
+  }
+  
+  void drawMark(){
+    fill(0);
+    text(""+distmark,pos.x+20,pos.y+dim.y-10);
   }
   
   void grow(float x,float y){

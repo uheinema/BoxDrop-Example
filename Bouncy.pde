@@ -24,9 +24,9 @@ class Bouncy extends Block{
   }
   
   @Override void draw(){
-   // super.draw();
     fill(getColor(type));
     ellipse (pos.x+dim.x/2,pos.y+dim.y/2,dim.x,dim.y);
+   // drawMark();
   }
   
 }

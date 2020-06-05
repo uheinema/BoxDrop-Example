@@ -7,16 +7,16 @@ class Block extends Something {
     this.type = type;
   }
 
-  //@Override 
-  boolean xoverlaps(Something b) {
+  @Override 
+    boolean isHoodie(Something b) {
     boolean lap=false;
-    float rim=dim.x/5;
-    
-    grow(rim, -rim);
+    float rimx=dim.x/4;
+    float rimy=dim.y/4;
+    grow(rimx, -rimy);
     if (super.overlaps(b)) lap=true;
-    grow(-rim*2, 2*rim);
+    grow(-rimx*2, 2*rimy);
     if (!lap&&super.overlaps(b)) lap=true;
-    grow(rim, -rim);
+    grow(rimx, -rimy);
     return lap;
   }
 
@@ -37,27 +37,23 @@ class Block extends Something {
     case 6: 
       return color(255, 165, 0);// orange
     default: 
-      return color(223);
+      return color(100,150,100);
     }
   }
 
-  void draw() {
+  @Override
+    void draw() {
     fill(getColor(type));
     super.draw();
   }
 
- @Override
-  boolean move() {
-    if (pos.y >= maxh) return false;
-  //  if(pos.y>maxh){
- //     pos.y=maxh;
- //     return false; // at bottom
-  //  }
+  @Override
+    boolean move() {
     // only look in movement direction
     boolean moved=super.move();
-    if(!moved) return false;
+    if (!moved) return false;
     grow(-2, -2);
-    if (blocks.collides(this)>=0){
+    if (blocks.collides(this)>=0) {
       moved=false;
       super.unmove();
     }
@@ -65,7 +61,6 @@ class Block extends Something {
     return moved;
   }// move
 }
-
 
 
 

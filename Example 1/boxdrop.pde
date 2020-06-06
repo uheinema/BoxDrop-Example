@@ -3,18 +3,13 @@ Blocks blocks = new Blocks();
 ArrayList<Spawner> spawn = new ArrayList<Spawner>();
 
 
-final int columns = 8;
-final int types=5;
+int columns = 10;
 
-
-boolean autoplay=true;
 
 boolean gameover=false;
 int score=0;
 
 float maxh ;
-
-boolean blink=false;
 
 void setup() {
   fullScreen();//size(600,600);
@@ -42,46 +37,30 @@ void reset() {
 void draw() {
   background(gameover?color(155, 12, 13):(frameCount|0xff407f40));
   fill(0);
-  blink=(frameCount%20<2);
-  if(blink&&gameover)fill(255);
-  text("Score: "+score+(gameover?"  Try again.":""),// fr: "+frameRate), 
+  if(gameover&&frameCount%10<2) fill(255);
+  text("Score: "+score+(gameover?"  Try again.":" fr: "+frameRate), 
     50, 100);
    //lights();camera();
-  int active=0;
   for (Spawner s : spawn) {
     s.draw();
     if (!gameover) {
-      if(s.spawn()){
-         active++;       
-      }
+
+      s.spawn();
       s.move();
     }
   }
-  if(active==0) gameover=true;
-  else score++;
   blocks.draw().move();
-  if(frameCount%100==0&&autoplay){
-    
-   for(int i=0;i<10;i++) play(blocks.get(int(random(blocks.size()-1))));
-    if(gameover) reset();
-  }
-}
-
-
-
-void play(Something b){
-int sc=blocks.markContacts(b);
-    if (sc>=3) {     
-      score+=10000*sc*(sc-2);
-      blocks.cleanup();
-      return;
-    }
 }
 
 void mousePressed() {
   Something b=blocks.get(new PVector(mouseX, mouseY));
   if (b!=null) {
-    play(b); 
+    int sc=blocks.markContacts(b);
+    if (sc>=3) {     
+      score+=sc*(sc-2);
+      blocks.cleanup();
+      return;
+    }
   }
   if (gameover&&mouseY<200) reset();
 }

@@ -17,7 +17,7 @@ class Bouncy extends Block{
     to.mult(0.011f);
     vel.add(to);
     if(!super.move()){
-      vel.mult(-1.0f);
+      vel.mult(-1.01f);
       return false;
     }
     return true;

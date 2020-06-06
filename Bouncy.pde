@@ -16,8 +16,9 @@ class Bouncy extends Block{
     to.sub(vel); 
     to.mult(0.011f);
     vel.add(to);
-    if(!super.move()){
+    if(!super.move()){ // reflect angular
       vel.mult(-1.0f);
+      if(autoplay)vel.x+=5*(random(2.0)-1);
       return false;
     }
     return true;

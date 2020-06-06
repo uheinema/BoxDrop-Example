@@ -1,7 +1,8 @@
 
 class Blocks
   extends ArrayList<Something> {
-
+  static final long serialVersionUID=12334;
+  
   Blocks() {
     super();
   }
@@ -102,7 +103,9 @@ class Blocks
   void cleanup() {
     for (int i=0; i<size(); ) {
       Something  b = get(i);
-      if (b.distmark >0)
+      if (b.distmark >0||
+         b.pos.x<-b.dim.x||
+         b.pos.x>width)
         remove(i);
       else
         i++;
